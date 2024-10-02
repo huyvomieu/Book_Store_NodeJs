@@ -1,4 +1,4 @@
-const Role = require('../../Models/Role.model')
+const Role = require('../../models/Role.model')
 class RoleController {
     // [GET] admin/role
     index(req, res, err) {

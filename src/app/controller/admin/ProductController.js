@@ -1,5 +1,5 @@
-const Product = require('../../Models/Product.model')
-const ProductCategory = require('../../Models/ProductCategory.model')
+const Product = require('../../models/Product.model')
+const ProductCategory = require('../../models/ProductCategory.model')
 const pagination = require('../../../helpers/pagination')
 class ProductController {
 

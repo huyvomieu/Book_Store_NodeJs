@@ -1,4 +1,4 @@
-const Product = require('../../Models/Product.model')
+const Product = require('../../models/Product.model')
 const searchRegxHelper = require('../../../helpers/search')
 const search = require('../../../helpers/search')
 class SearchController {

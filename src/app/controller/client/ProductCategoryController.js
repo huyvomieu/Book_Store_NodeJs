@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-const ProductCategory = require('../../Models/ProductCategory.model')
-const Product = require('../../Models/Product.model')
+const ProductCategory = require('../../models/ProductCategory.model')
+const Product = require('../../models/Product.model')
 const pagination = require('../../../helpers/pagination')
 
 class ProductCategoryController {

@@ -1,5 +1,5 @@
-const Account = require('../../Models/Account.model')
-const Role = require('../../Models/Role.model')
+const Account = require('../../models/Account.model')
+const Role = require('../../models/Role.model')
 const md5 = require('md5')
 
 class AccountController {

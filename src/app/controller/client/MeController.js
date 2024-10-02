@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const Product = require('../../Models/Product.model')
+const Product = require('../../models/Product.model')
 const search = require('../../../helpers/search')
 const pagination = require('../../../helpers/pagination')
 class MeController {

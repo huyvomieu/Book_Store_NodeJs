@@ -1,4 +1,4 @@
-const Account = require('../../Models/Account.model')
+const Account = require('../../models/Account.model')
 const md5 = require('md5')
 
 class AuthController {

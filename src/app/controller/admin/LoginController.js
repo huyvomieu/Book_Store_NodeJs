@@ -1,4 +1,4 @@
-// const Role = require('../../Models/Role.model')
+// const Role = require('../../models/Role.model')
 class LoginController {
     // [GET] admin/role
     login(req, res, err) {

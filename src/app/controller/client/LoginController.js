@@ -1,4 +1,4 @@
-// const Role = require('../../Models/Role.model')
+
 class LoginController {
     // [GET] auth/login
     login(req, res, err) {
