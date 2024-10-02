@@ -1,0 +1,17 @@
+nav(class="nav justify-content-end bg-light")
+    .nav-item(class="dropdown mr-2 p-2")
+        a(class=" dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false")
+            span(class= "") #{user.username}
+            img(src= user.avatar width= "30px" class= "rounded-circle")
+        ul(class= "dropdown-menu bg-light text-dark" )
+            li(class= "dropdown-item")
+                a(href= "/admin/me" class= "text-dark ") Tài khoản
+            li(class= "dropdown-item")
+                a(href= "/admin/settings" class= "text-dark ") Cài đặt
+            li(class= "dropdown-divider")
+            li(class= "dropdown-item")
+                a(href= "/admin/auth/logout" class= "text-dark") Đăng xuất
+    .nav-item(class="mr-3 p-2")
+        div(class= "bell h-100")
+            span(class= "ti-bell h3")
+    

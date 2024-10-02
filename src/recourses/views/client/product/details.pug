@@ -1,0 +1,48 @@
+extends ../layouts/main.pug
+
+block content
+    div #{cart.id}
+    form(action= `/cart/add/${product.id}`, method="post" form-add-cart)
+        .row 
+            nav(aria-label='breadcrumb')
+            ol.breadcrumb
+                li.breadcrumb-item.active
+                    span Haui
+                li.breadcrumb-item
+                    a(href= `/productCategory/${category.slug}`) #{category.name} 
+                li.breadcrumb-item.active(aria-current='page') #{product.name}
+        .row 
+            .col-lg-6
+                div(class= "container-img bg-fff text-center")
+                    img(src= product.image, alt="")
+            .col-lg-6.bg-fff
+                div(class = "text-container mb-3" )
+                    p(class = "font-weight-bolder font-italic") #{product.name}
+                    div(class= "text-category")
+                        span Danh mục: 
+                        a(href= `/productCategory/${category.slug}`) #{category.name}
+                    div(class= "text-price" )
+                        span Giá: 
+                        span(class = "h3 text-danger" ) #{product.price}.VND
+                    div(class= "text-condition")
+                        span Tình trạng: 
+                        span #{product.condition == "new" ? "Mới" : "Cũ"}
+                    div(class= "text-number")
+                        span Số lượng: 
+                        input(type="number" min="1" max="50" value= "1" name="quantity") 
+                div(class= "btn-container")
+                    div(class= "mb-3")
+                        button(class= "btn btn-primary") Mua Ngay
+                    div()
+                        button(type= "submit" class= "btn btn-outline-primary" data-id = product.id  btn-add-cart ) Thêm vào giỏ hàng
+
+    .row 
+        .col 
+            span(class="h2" ) Mô tả sản phẩm
+    .row 
+        .col
+            div()
+                p !{product.description}
+    script(src= "/js/cart.js")
+        
+

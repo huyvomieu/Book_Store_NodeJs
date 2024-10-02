@@ -1,0 +1,51 @@
+extends ../layouts/main.pug
+
+block content
+    h2 Thông tin Sách
+    form(method="post" action= `/product/update/${book._id}?_method=PATCH` enctype="multipart/form-data")
+        .form-group
+            label() Tên sách
+            input.form-control(type="text", placeholder="Tên sách", id="name", name="name" value= book.name require)
+        .form-group
+            label() Giá
+            input.form-control(type="text", placeholder="VND", id="price", name="price" value= book.price require)
+        .form-group
+            label() Trường
+            select.form-control(name="university" data-uni = book.university)
+                option(value="") Chọn Trường
+                option(value="HaUI" ) Trường Đại học Công nghiệp Hà Nội
+                option(value="HUST") Trường Đại học Bách Khoa Hà Nội
+                option(value="FPT" selected) Trường Đại học FPT
+        .form-group
+            label() Tình Trạng sách
+            select.form-control(name="condition" data-condition = book.condition)
+                option(value="" ) Tình Trạng
+                option(value="Mới 99%") Mới 99%
+                option(value="Cũ 90%") Cũ 90%
+                option(value="Cũ 50%") Cũ 50%
+        .form-group
+            label() Mô tả sách
+            textarea.form-control(type="text", placeholder="Mô tả", id="description", name="description", rows="3" ) #{book.description}
+        .form-group(upload-image)
+            label() Tải ảnh lên
+            input.form-control-file(type="file", placeholder="", id="image", name="image" upload-image-input)
+            img(src= book.image, id="show-img" upload-image-preview width="50px" height="50px")
+        button.btn.btn-primary(type="sumbit" id="btnEdit") Lưu Lại
+
+    script.
+        
+        var universityValue = document.querySelector('select[name="university"]').getAttribute('data-uni')
+        if(universityValue) {
+            var optionDescripton = document.querySelector(`select[name="university"] option[value="${universityValue}"]`)
+            optionDescripton.setAttribute('selected', 'selected')
+        }
+        var conditionValue = document.querySelector('select[name="condition"]').getAttribute('data-condition')
+        if(conditionValue) {
+            var descriptionOpction = document.querySelector(`select[name="condition"] option[value="${conditionValue}"]`)
+            descriptionOpction.setAttribute('selected','selected')
+        }
+        
+
+
+
+    

@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/css/themify-icons/themify-icons.css")
+    link(rel="stylesheet", href="/css/style.css")
+    title(data-title = title) #{title}
+    block scripts
+  body()
+    .header(class= "fixed-top" style="margin-left: 172px ")
+      include ../partials/header.pug
+    .sidebar.position-fixed(class= "" style="top: 0; left: 0")
+      include ../partials/sidebar.pug
+    .container(class= "", style="margin-left: 180px; margin-top: 80px")
+      block content
+
+    .footer
+      include ../partials/footer.pug
+
+
+script(src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js")
+script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js")
+script(src="/js/script.js")
+script(src="/js/alert.js")
+script(src="/js/permission.js")
+script(src="/tinymce/tinymce.min.js")
+script(src="/js/my-tinymce-config.js")

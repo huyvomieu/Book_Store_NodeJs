@@ -1,0 +1,136 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content
+    form(action="" method= "get" id="form-product-edit")
+    form(action="", method="post" id = "form-product-delete") 
+    form(action="admin/product/deleteMulti?_method=DELETE", method="post" id='delete-multi' ) 
+        input(inputDeleteMulti style= "display: none" name = "ids")
+    form
+        +alert-success(1000)
+        h2 Dach sách 
+        div(class= 'mb-3')
+            select.form-control.mt-2(sort )
+                option(value="" disabled selected) -- Sắp xếp --
+                option(value="price-asc" price desc) Giá tăng dần
+                option(value="price-desc" price esc) Giá giảm dần
+            select.form-control.mt-1(filter)
+                option(value="" disabled selected) -- Lọc --
+                option(value="") Tất Cả
+                option(value="HaUI") HaUI
+                option(value="HUST") HUST
+                option(value="FPT") FPT
+            button(class= "btn btn-danger" btn-delete-option) Xóa lựa chọn
+        if(role.permissions.includes('product-add'))
+            div(class= "text-right mb-3")
+                a(href= "/admin/product/create" class= "btn btn-primary") Thêm sách mới 
+        //- div(class)
+        //-     a(href= "/admin/product/trash")
+        //-         span(class="ti-trash h3" title= "Thùng rác" )
+        .row
+            //- display: none
+            .col-2
+                button(type= "button"
+                class= "btn btn-success" 
+                id= "btn-delete-multi-product" 
+                btn-delete-multi-product data-toggle="modal" 
+                data-target="#ModalDeleteMulti" 
+                style= "display: none;"
+                ) Xóa những sản phẩm đã chọn
+        table.table.table-striped.text-center
+            thead.thead-dark
+                tr
+                    th Chọn Tất Cả
+                        input(type= "checkbox" select-all)
+                    th STT
+                    th Ảnh
+                    th Tên sách
+                    th Giá
+                    th Mô tả
+                    th Trường
+                    th
+            tbody
+                tr
+                    //- td.text-center
+                    //-     +alert-empty(pagination.countPage)
+                - var count = (pagination.currentPage-1)*pagination.limitItems + 1
+                each book in books
+                    tr
+                            td 
+                                input(type="checkbox" id= book._id select-id)
+                            td #{count++}
+                            td 
+                                img(src= book.image, alt="", width="40px")
+                            td
+                                a(href= `/product/${book._id}` class= "nav-link") !{book.name}
+                            td #{book.price}VND
+                            td
+                                a(href= `/product/${book._id}` class= "nav-link") !{book.description}
+                                    
+                            td #{book.university}
+                            td
+                                if(role.permissions.includes('product-update'))
+                                    button(type="button" class= "btn btn-primary" id= "" button-change = book._id btn-change-product) Sửa
+                                if(role.permissions.includes('product-delete'))
+                                    button(type="button" class= "btn btn-danger" data-id = book._id data-toggle="modal" data-target="#ModalDelete" delete-product) Xóa
+                tr
+                    td
+                        nav(aria-label='')
+                            ul.pagination
+                                if pagination.currentPage > 1
+                                    li.page-item
+                                        button(
+                                            class="page-link"
+                                            button-pagination = pagination.currentPage-1
+                                            total-page = pagination.totalPage 
+                                        )
+                                            span(aria-hidden='true') &laquo;
+                                - for(var i = 1; i<= pagination.totalPage; i++)
+                                    li(class= `page-item ${i == pagination.currentPage ? "active" : ""}`)
+                                        a.page-link(href=`?page=${i}`) #{i}
+                                if pagination.currentPage < pagination.totalPage
+                                    li.page-item
+                                        button(
+                                            class="page-link"
+                                            button-pagination = pagination.currentPage+1
+                                            total-page = pagination.totalPage
+                                        )
+                                            span(aria-hidden='true') &raquo;
+    .modal(class="modal fade" tabindex='-1' role='dialog' id= "ModalDelete" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Xác nhận Xóa
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p Bạn có chắc chắn xóa sách này?
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Hủy
+                    button.btn.btn-primary(type='button' id= 'btn-product-delete') OK
+    .modal(class="modal fade" tabindex='-1' role='dialog' id= "ModalDeleteMulti" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Xác nhận Xóa 
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p Bạn có chắc chắn xóa tất cả sản phẩm đã chọn?
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Hủy
+                    button.btn.btn-primary(type='button' id= 'btn-product-deleteMulti') OK
+
+
+    script(src="/js/product.js")
+
+        
+        
+
+
+
+        
+
+
+
+                
+

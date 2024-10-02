@@ -1,0 +1,24 @@
+extends ../layouts/main.pug
+
+block content
+    div()
+        h2 #{titlePage} 
+    .div(class= "text-right")
+        a(href="/admin/role/create" class= "btn btn-primary") Tạo mới
+    table(class= "table table-striped mt-3")
+        thead.table-dark
+            tr
+                th STT
+                th Tên
+                th Mô tả
+                th Ngày tạo
+
+        tbody
+            - var count = 1
+            each role in roles
+                tr 
+                    td #{count++}
+                    td #{role.name}
+                    td #{role.description}
+                    td #{role.createdAt}
+

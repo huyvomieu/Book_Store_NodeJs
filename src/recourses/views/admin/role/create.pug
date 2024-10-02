@@ -1,0 +1,14 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content
+    div()
+        h2 #{titlePage}
+    +alert-success(1500)
+    form(method="post" action="/admin/role/store")
+        .form-group
+            label() Tên nhóm quyền
+            input.form-control(type="text", placeholder="Tên danh mục", id="name", name="name")
+        .form-group
+            label() Mô tả
+            textarea.form-control(class= "" type="text", placeholder="Mô tả", id="description", name="description", rows="3")
+        button.btn.btn-primary(type="sumbit" id= "btnCreateRole" class= "align-item-center") Tạo mới

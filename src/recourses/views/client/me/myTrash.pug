@@ -1,0 +1,111 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content
+    form(action="" method= "post" id="formRestore")
+    form(action="", method="post" id = "form-product-delete-permanently") 
+    //- form(action="/product/deleteMulti?_method=DELETE", method="post" id='delete-multi' ) 
+    //-     input(inputDeleteMulti style= "display: none" name = "ids")
+    div(class= "container")
+        +alert-success("2000")
+        form
+            h2 Dach sách đã xóa
+            .row
+                a(href= "/me/myProduct")
+                    span(class="ti-back-left h3" title= "Quay lại")
+            .row.mb-3
+                //- display: none
+                button(type= "button" class= "btn btn-success" id= "btn-delete-multi" btn-delete-multi data-toggle="modal" data-target="#ModalDeleteMulti") Xóa những sản phẩm đã chọn
+            table.table.table-striped.text-center
+                thead.thead-dark
+                    tr.row
+                        th.col-1 Chọn Tất Cả
+                            input(type= "checkbox" select-all)
+                        th.col-1 STT
+                        th.col-1 Ảnh
+                        th.col-2 Tên sách
+                        th.col-1 Giá
+                        th.col-3 Mô tả
+                        th.col-1 Số lượng
+                        th.col-2
+                
+                if pagination.countPage < 1
+                    tr.row
+                        td.col
+                            h2 Danh sách rỗng !
+                tbody
+                    - var count = (pagination.currentPage-1)*pagination.limitItems + 1
+                    
+                    each book in books
+                        tr.row
+                            td.col-1 
+                                input(type="checkbox" id= book._id select-id)
+                            td.col-1 #{count++}
+                            td.col-1 
+                                img(src= book.image, alt="", width="40px")
+                            td.col-2 #{book.name}
+                            td.col-1 #{book.price}VND
+                            td.col-3 #{book.description}
+                            td.col-1 #{book.number}
+                            td.col-2 
+                                .co
+                                    button(type="button" class= "btn btn-primary" id= "btn-restore-product" button-restore = book._id) Khôi phục
+                                .co
+                                    button(type="button" class= "btn btn-danger" id= "btn-product-delete-permanently" data-id = book._id  data-toggle="modal" data-target="#ModalDeleteVV") Xóa vĩnh viễn
+                    tr.row
+                        td
+                            nav(aria-label='')
+                                ul.pagination
+                                    if pagination.currentPage > 1
+                                        li.page-item
+                                            button(
+                                                class="page-link"
+                                                button-pagination = pagination.currentPage-1
+                                                total-page = pagination.totalPage 
+                                            )
+                                                span(aria-hidden='true') &laquo;
+                                    - for(var i = 1; i<= pagination.totalPage; i++)
+                                        li(class= `page-item ${i == pagination.currentPage ? "active" : ""}`)
+                                            a.page-link(href=`?page=${i}`) #{i}
+                                    if pagination.currentPage < pagination.totalPage
+                                        li.page-item
+                                            button(
+                                                class="page-link"
+                                                button-pagination = pagination.currentPage+1
+                                                total-page = pagination.totalPage
+                                            )
+                                                span(aria-hidden='true') &raquo;
+    .modal(class="modal fade" tabindex='-1' role='dialog' id= "ModalDeleteVV")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Xác nhận xóa vĩnh viễn
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p Bạn có chắc chắn xóa vĩnh viễn sách này?
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Hủy
+                    button.btn.btn-primary(type='button' id= 'btn-confirm-delete-permanently') OK
+    .modal(class="modal fade" tabindex='-1' role='dialog' id= "ModalDeleteVVMulti")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Xác nhận Xóa 
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p Bạn có chắc chắn xóa vĩnh viễn sản phẩm đã chọn?
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Hủy
+                    button.btn.btn-primary(type='button' id= 'btn-product-deleteVV') OK
+    script.
+        
+
+
+
+        
+
+
+
+                
+

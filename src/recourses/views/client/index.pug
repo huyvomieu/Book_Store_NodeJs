@@ -1,0 +1,39 @@
+extends layouts/main.pug
+include mixins/productLayout.pug
+include mixins/productCategoryLayout.pug
+block content
+    #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+        ol.carousel-indicators
+            li.active(data-target='#carouselExampleIndicators' data-slide-to='0')
+            li(data-target='#carouselExampleIndicators' data-slide-to='1')
+            li(data-target='#carouselExampleIndicators' data-slide-to='2')
+        .carousel-inner
+            .carousel-item.active
+                img.d-block.w-100(src='https://static.oreka.vn/c2e73c27-a4b7-4878-be4f-52b505a30f79' alt='...')
+            .carousel-item
+                img.d-block.w-100(src='https://static.oreka.vn/0c679e5d-57d3-41bc-8b21-bd1098a9b247' alt='...')
+            .carousel-item
+                img.d-block.w-100(src='https://static.oreka.vn/a7515665-f313-40de-9d7c-679e5ac01a2c' alt='...')
+        button.carousel-control-prev(type='button' data-target='#carouselExampleIndicators' data-slide='prev')
+            span.carousel-control-prev-icon(aria-hidden='true')
+            span.sr-only Previous
+        button.carousel-control-next(type='button' data-target='#carouselExampleIndicators' data-slide='next')
+            span.carousel-control-next-icon(aria-hidden='true')
+            span.sr-only Next
+    div(class= "category-container bg-fff mt-4")
+        h3
+            span(class= "ti-list mr-3 text-danger")
+            | Danh mục sản phẩm
+        div(class= "table-category text-center")
+            +productCategoryLayoutList(categories)    
+    div(class= "category-container bg-fff mt-4 pt-3")
+        h3
+            span(class= "ti-stats-up mr-3 text-danger")
+            | Sản phẩm nổi bật
+        +productLayoutList(productsOutStand)
+    div(class= "products-container bg-fff")
+        h3
+            span(class= "ti-layout-grid2 mr-3 text-danger")
+            | Danh sách sản phẩm
+        +productLayoutList(products)
+

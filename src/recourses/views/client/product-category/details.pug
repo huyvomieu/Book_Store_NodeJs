@@ -1,0 +1,16 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+include ../mixins/productLayout.pug
+
+block content
+    +alert-success("3000")
+    nav(aria-label='breadcrumb')
+    ol.breadcrumb
+        li.breadcrumb-item
+            a(href='#') Haui 
+        li.breadcrumb-item.active(aria-current='page') #{title}
+    if(products.length > 0)
+        +productLayoutList(products)
+    else
+        div(class= "text-center")
+            h2 Không có sản phẩm nào!

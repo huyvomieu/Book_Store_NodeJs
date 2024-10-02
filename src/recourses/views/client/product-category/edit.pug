@@ -1,0 +1,25 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+
+block content
+    +alert-success("3000")
+    h2 Chỉnh sửa danh mục
+    form(method="post" action=`/productCategory/update/${record._id}?_method=PATCH` enctype="multipart/form-data" )
+        .form-group
+            label() Tên danh mục
+            input.form-control(type="text", placeholder="Tên danh mục", id="name", name="name" value = record.name)
+        .form-group
+            //- input.form-control(type="text", placeholder="Danh mục cha", id="parrent-id", name="parrent-id")
+            select(name="parrentId")
+                option(value="" disabled selected) Chọn danh mục cha 
+                //- each item in records 
+                option(value= record.parrentId) #{record.parrentId}
+        .form-group
+            label() Mô tả danh mục
+            textarea.form-control(class= "tiny-mce" type="text", placeholder="Mô tả", id="description", name="description", rows="3" ) #{record.description}
+        .form-group(upload-image)
+            label() Tải ảnh lên
+            input.form-control-file(type="file", placeholder="", id="image-file", name="image" accept= "image/*" upload-image-input)
+            img(src= record.image, id="show-img" width= "200px" height= "200px" upload-image-preview)
+        button.btn.btn-primary(type="sumbit" id= "btnEdit" class= "align-item-center") Lưu
+    

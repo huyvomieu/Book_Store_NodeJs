@@ -1,0 +1,33 @@
+head
+  nav(class="navbar navbar-expand-sm navbar-light bg-light justify-content-between fixed-top font-weight-bolder")
+    a.navbar-brand(href='/')
+      img(class="rounded-circle" src="/images/444483218_1214888926537758_4901314953074285790_n.jpg", width="40px", height="40px")
+    button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item
+          a.nav-link(href='/' class= "text-primary")
+            | Trang chủ 
+        li.nav-item
+          a.nav-link(href='/product/create' class= "text-primary")
+            | Đăng bán sách
+        li.nav-item
+          a.nav-link(href='/me/myProduct' class= "text-primary")
+            | Kho sách của tôi 
+        li.nav-item
+      form(method= "get" action= "/search")
+        div(class= "input-container")
+          input.form-control.mr-sm-2(id= "input-search" name="keyword" value= keyword type='text' placeholder='Nhập sách cần tìm' aria-label='Search')
+          button.btn.my-2.my-sm-0(id= "" type='submit') 
+            span(class= "ti-search")
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link(href='/cart' class= "text-primary")
+            span(class= "ti-shopping-cart")
+        li.nav-item
+          a.nav-link(href='/auth/register' class= "text-primary")
+            | Đăng kí
+        li.nav-item
+          a.nav-link(href='/auth/login' class= "text-primary")
+            | Đăng nhập

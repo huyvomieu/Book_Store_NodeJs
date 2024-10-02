@@ -1,0 +1,48 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content 
+    div()
+        h2 #{titlePage}
+    
+    //- save data role from server
+    input(class= "d-none" data-role-default= records)
+    +alert-success(1500)
+    div(class= "text-right mb-3")
+        button(class="btn btn-primary" type="button" btn-update-role) Cập nhật
+    table(class= "table text-center" id= "table-update-roles")
+        thead(class= "table-dark")
+            tr(data-name= "id")
+                th Quyền
+                each item in records
+                    th(data-id= item._id) #{item.name}
+        tbody
+            tr
+                th(class= "text-left") Quản lý sản phẩm
+            each role in permiss
+                tr(data-name= `product-${role.id}`)
+                    td #{role.name}
+                    each item in records
+                        td
+                            input(type="checkbox" data-role=`product-${role.id}`)
+            tr
+                th(class= "text-left") Quản lý danh mục
+            each role in permiss
+                tr(data-name= `productCategory-${role.id}`)
+                    td #{role.name}
+                    each item in records
+                        td
+                            input(type="checkbox" data-role=`productCategory-${role.id}`)
+            tr
+                th(class= "text-left") Quản lý tài khoản
+            each role in permiss
+                tr(data-name= `account-${role.id}`)
+                    td #{role.name}
+                    each item in records
+                        td
+                            input(type="checkbox" data-role=`account-${role.id}`)
+    form(
+        action= "/admin/role/storePermissions?_method=PATCH"
+        method= "post"
+        id= "form-update-permissions"
+    )
+        input(type= "text" name= "permissions" class= "d-none") 

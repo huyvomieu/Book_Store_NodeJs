@@ -1,0 +1,10 @@
+mixin productLayoutList(products)
+    .row.d-flex
+        each product in products
+            .col-lg-4.col-sm-6
+                .card.m-4(style="width: 16rem;" class)
+                    a(href= `/product/${product.slug}`)
+                        img.card-img-top.mb-2(class='img-responsive' src= product.image) 
+                        p.card-title.ml-4 #{product.name}
+                        b.card-text.ml-4.mb-3 Giá: #{product.price}.VND
+                    a.btn.btn-primary Mua Ngay

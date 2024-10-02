@@ -1,0 +1,50 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+
+block content
+    .container
+        +alert-success("3000")
+        h2 Đăng mới sách
+        form(method="post" action="/admin/product/store" enctype="multipart/form-data" )
+            .form-group
+                label() Tên sách
+                input.form-control(type="text", placeholder="Tên sách", id="name", name="name")
+            .form-group
+                label Chọn làm sản phẩm nổi bật 
+                br
+                span.mr-2 Có
+                input.mr-3(type="radio" id= "outstand" name= "outstand" value= "1") 
+                span.mr-2 Không
+                input(type="radio" id= "outstand" name= "outstand" value = "0") 
+            .form-group
+                label() Giá
+                input.form-control(type="text", placeholder="VND", id="price", name="price")
+            .form-group
+                label() Danh mục
+                select.form-control(name="category")
+                    option(value= "" selected disabled) -- Chọn danh mục -- 
+                    each category in categories 
+                        option(value= category._id) #{category.name}
+            .form-group
+                label() Trường
+                select.form-control(name="university")
+                    option(value="" selected required) Tên Trường
+                    option(value="HaUi") Trường Đại học Công nghiệp Hà Nội
+                    option(value="HUST") Trường Đại học Bách Khoa Hà Nội
+                    option(value="FPT") Trường Đại học FPT
+            .form-group
+                label() Tình Trạng sách
+                select.form-control(name="condition")
+                    option(value="" selected disabled) Tình Trạng
+                    option(value="new") Mới
+                    option(value="old") Cũ
+            .form-group
+                label() Mô tả sách
+                textarea.form-control(class= "tiny-mce" type="text", placeholder="Mô tả", id="description", name="description", rows="3")
+            .form-group(upload-image)
+                label() Tải ảnh lên
+                input.form-control-file(type="file", placeholder="", id="image-file", name="image" accept= "image/*" upload-image-input)
+                img(src= "", id="show-img" upload-image-preview)
+            button.btn.btn-primary(type="sumbit" id= "" ) Đăng bán 
+    script.
+    

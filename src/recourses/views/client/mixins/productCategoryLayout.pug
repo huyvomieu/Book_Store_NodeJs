@@ -1,0 +1,7 @@
+mixin productCategoryLayoutList(items)
+    .row.d-flex 
+        each item in items 
+            .col-2
+                a(href= `/productCategory/${item.slug}`)
+                    img(src = item.image width= "40" height= "40" style= "border-radius: 20%")
+                    div #{item.name}

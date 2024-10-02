@@ -1,0 +1,26 @@
+doctype html
+head
+  title Login
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  link(rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css')
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css')
+  link(rel='stylesheet' href='/css/login.css')
+form(action="", method= "")
+  .container
+    .section.text-center
+      h4.pb-3 Đăng nhập
+      .form-group
+        input.form-control(type='email' placeholder='Email')
+      .form-group.mt-2
+        input.form-control(type='password' placeholder='Password')
+      a.btn.btn-primary.mt-4(href='') Đăng nhập
+      .form-group.mt-2
+        p Hoặc
+        a.btn(href='')
+          i.fa-brands.fa-facebook-f
+        a.btn(href='')
+          i.fa-brands.fa-google
+      p.mb-0.mt-4.text-center
+        a.link(href='/auth/forgotPassword') Quên mật khẩu?

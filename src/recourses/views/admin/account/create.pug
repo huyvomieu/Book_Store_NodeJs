@@ -1,0 +1,42 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content
+    div()
+        h2 #{titlePage}
+    +alert-success(1500)
+    +alert-error(1500)
+    form(method="post" action="/admin/account/store" enctype="multipart/form-data")
+        .form-group
+            label() Tên đăng nhập
+            input.form-control(type="text", placeholder="Tên đăng nhập", id="username", name="username")
+        .form-group
+            label() Mật khẩu
+            input.form-control(type="password", placeholder="Mật khẩu", id="password", name="password")
+        .form-group
+            label() Email
+            input.form-control(type="email", placeholder="Email", id="email", name="email")
+        .form-group
+            label() Địa chỉ
+            input.form-control(type="text", placeholder="Địa chỉ", id="address", name="address")
+        .form-group
+            label() Số điện thoại
+            input.form-control(type="text", placeholder="Số điện thoại", id="phone", name="phone")
+        .form-group
+            label() Trạng thái
+            select.form-control(name="status")
+                option(value= "" disabled selected) -- Trạng thái --
+                option(value= "action") Kích hoạt
+                option(value= "inaction") Chưa kích hoạt
+                option(value= "block") Bị khóa
+        .form-group
+            label() Quyền 
+            select.form-control(name="role_id")
+                option(value= "" disabled selected) -- Quyền --
+                each role in roles
+                    option(value= role._id) #{role.name}
+        .form-group
+            label() Ảnh đại diện
+            input.form-control(type= "file" name= "avatar")
+        
+        
+        button.btn.btn-primary(type="sumbit" id= "btnCreateRole" class= "align-item-center") Tạo Tài khoản

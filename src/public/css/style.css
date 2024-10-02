@@ -1,0 +1,92 @@
+body {
+    background-color: #f0f0f0;
+}
+
+.bg-fff {
+    background-color: #fff !important;
+}
+
+.d {
+    flex-wrap: wrap;
+}
+
+.bg-img-login {
+    background-image: url();
+}
+
+#btn-delete-multi {
+    display: none;
+}
+
+/* show alert */
+[show-alert] {
+    position: fixed !important;
+    top: 70px;
+    right: 44px;
+    /* z-index: 9999px; */
+}
+
+[show-alert].alert-hidden {
+    animation-name: alert-hidden;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+}
+
+@keyframes alert-hidden {
+    from {
+        right: 44px;
+    }
+
+    to {
+        right: -100%;
+        display: none;
+    }
+}
+
+/* end show alert */
+
+/*  user  img */
+
+.user {
+    cursor: pointer;
+}
+
+.user ul {
+    /* display: none; */
+    list-style-type: none;
+    padding: 0;
+}
+
+.user li {
+    line-height: 40px;
+    margin-left: 4px;
+}
+
+.user li:hover {
+    opacity: 0.8;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/*  end user img  */
+
+
+/* begin search header */
+.input-container {
+    position: relative;
+    width: 200px;
+}
+
+.input-container input {
+    width: 100%;
+}
+
+.input-container button {
+    position: absolute;
+    right: 0;
+    top: 0%;
+}
+
+/* end search header */

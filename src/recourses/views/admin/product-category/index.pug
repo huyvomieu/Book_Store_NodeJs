@@ -1,0 +1,84 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content
+    form(action="" method= "get" id="form-product-category-edit")
+    form(action="", method="post" id = "form-product-category-delete") 
+    form(action="/product/deleteMulti?_method=DELETE", method="post" id='delete-multi' ) 
+        input(inputDeleteMulti style= "display: none" name = "ids")
+    form
+        +alert-success(1000)
+        h2 Dach sách
+        if(role.permissions.includes('productCategory-add'))
+            .div(class= "text-right")
+                a(href= "/admin/productCategory/create" class= "btn btn-primary") Thêm Danh mục mới 
+        .row.mb-3
+            //- display: none
+            button(type= "button" class= "btn btn-success" id= "btn-delete-multi" btn-delete-multi data-toggle="modal" data-target="#ModalDeleteMulti") Xóa những sản phẩm đã chọn
+        table.table.table-striped.mt-3
+            thead.table-dark
+                tr
+                    th Chọn Tất Cả 
+                        input(type= "checkbox" select-all)
+                    th STT
+                    th Ảnh
+                    th Tên danh mục
+                    th Mô tả
+                    th
+            tbody
+                tr
+                    if(pagination.countPage)
+                        //- td.text-center
+                        //-     +alert-empty(pagination.countPage)
+                - var count = (pagination.currentPage-1)*pagination.limitItems + 1
+                each record in records
+                    tr
+                        td
+                            input(type="checkbox" id= record._id select-id)
+                        td #{count++}
+                        td
+                            img(src= record.image, alt="", width="40px")
+                        td #{record.name}
+                        td !{record.description}
+                        td
+                            if(role.permissions.includes('productCategory-update'))
+                                button(type="button" class= "btn btn-primary" id= "btn-change-product-category" button-change-product-category = record._id) Sửa
+                            if(role.permissions.includes('productCategory-delete'))
+                                button(type="button" class= "btn btn-danger" data-id = record._id data-toggle="modal" data-target="#ModalDelete" btn-delete-product-category) Xóa
+    .modal(class="modal fade" tabindex='-1' role='dialog' id= "ModalDelete" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Chuyển vào thùng rác
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p Bạn có chắc chắn xóa danh mục này?
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Hủy
+                    button.btn.btn-primary(type='button' id= 'btn-product-category-delete') OK
+    .modal(class="modal fade" tabindex='-1' role='dialog' id= "ModalDeleteMulti" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Xác nhận Xóa 
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p Bạn có chắc chắn xóa tất cả sản phẩm đã chọn?
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Hủy
+                    button.btn.btn-primary(type='button' id= 'btn-product-deleteMulti') OK
+
+    script(src= "/js/product-category.js")
+
+        
+        
+
+
+
+        
+
+
+
+                
+

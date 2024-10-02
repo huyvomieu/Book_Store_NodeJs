@@ -1,0 +1,54 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content
+    div()
+        h2 #{titlePage} 
+    +alert-success(1500)
+    .div(class= "text-right")
+        if(role.permissions.includes('account-add'))
+            a(href="/admin/account/create" class= "btn btn-primary") Tạo mới
+    table(class= "table table-striped mt-3")
+        thead.table-dark
+            tr
+                th STT
+                th Ảnh đại diện
+                th Email
+                th Trạng thái
+                th Quyền
+                th Ngày tạo
+                th 
+
+        tbody
+            - var count = 1
+            each record in records
+                tr
+                    td #{count++}
+                    td 
+                        img(src= record.avatar width="30px" )
+                    td #{record.email}
+                    td #{record.status}
+                    td #{record.role.name}
+                    td #{record.createdAt}
+                    th
+                        if(role.permissions.includes('account-update'))
+                            button(type="button" class= "btn btn-primary"  button-change = record._id btn-edit-account) Sửa
+                        if(role.permissions.includes('account-delete'))
+                            button(type="button" class= "btn btn-danger" data-id = record._id data-toggle="modal" data-target="#ModalDelete" btn-delete-account) Xóa
+
+
+    .modal(class="modal fade" tabindex='-1' role='dialog' id= "ModalDelete" aria-labelledby="exampleModalLabel" aria-hidden="true")
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    h5.modal-title Xác nhận Xóa
+                    button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') &times;
+                .modal-body
+                    p Bạn có chắc chắn xóa tài khoản này?
+                .modal-footer
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Hủy
+                    button.btn.btn-primary(type='button' id= 'btn-account-delete' btn-account-delete) OK
+    form(action= "", method="post" form-delete-account)
+
+
+    script(src= "/js/account.js")
