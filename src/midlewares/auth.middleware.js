@@ -1,5 +1,5 @@
-const Account = require('../app/Models/Account.model')
-const Role = require('../app/Models/Role.model')
+const Account = require('../app/models/Account.model')
+const Role = require('../app/models/Role.model')
 
 module.exports.requireAuth = async (req, res, next) => {
     if (!req.cookies.token) {

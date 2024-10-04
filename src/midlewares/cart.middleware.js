@@ -1,5 +1,5 @@
-const Account = require('../app/Models/Account.model')
-const Cart = require('../app/Models/Cart.model')
+const Account = require('../app/models/Account.model')
+const Cart = require('../app/models/Cart.model')
 
 module.exports.checkCart = async (req, res, next) => {
     // let checkedLogin = await Account.findOne({ token: req.cookies.token })
@@ -12,7 +12,9 @@ module.exports.checkCart = async (req, res, next) => {
     }
     else {
         const cart = await Cart.findOne({ _id: req.cookies.cartId })
-        cart.products.reduce((sum, item) => sum + item.quantity, 0)
+        const total = cart.products.reduce((sum, item) => sum + item.quantity, 0)
+        cart.total = total;
+        res.locals.cart = cart;
         next();
 
     }

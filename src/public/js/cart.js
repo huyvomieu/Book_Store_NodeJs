@@ -1,11 +1,18 @@
-// begin add cart
-// var btnAddCart = document.querySelector('[btn-add-cart]')
-// console.log(btnAddCart)
-// if (btnAddCart) {
-//     btnAddCart.addEventListener("click", (e) => {
-//         var formSubmit = document.querySelector('[form-add-cart]')
-//         formSubmit.submit()
-//     })
+// begin change quantity cart
+var inputsQuantity = document.querySelectorAll('[input-change-quantity]')
+if (inputsQuantity.length > 0) {
+    inputsQuantity.forEach(input => {
+        input.addEventListener('change', (e) => {
+            let productId = input.getAttribute('data-id');
+            let quantity = input.value;
+            if (quantity == 0) {
+                window.location.href = `/cart/delete/${productId}`
+            }
+            else {
+                window.location.href = `/cart/update/${productId}/${quantity}`
+            }
 
-// }
-// end add cart
+        })
+    });
+}
+// end change quantity cart

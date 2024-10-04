@@ -1,7 +1,6 @@
 extends ../layouts/main.pug
 
 block content
-    div #{cart.id}
     form(action= `/cart/add/${product.id}`, method="post" form-add-cart)
         .row 
             nav(aria-label='breadcrumb')

@@ -1,0 +1,47 @@
+extends ../layouts/main.pug
+
+block content
+    h2 #{titlePage} 
+    table(class= "table table-striped mt-3")
+        thead.table-dark
+            tr
+                th STT
+                th Ảnh
+                th Tên
+                th Giá
+                th Số lượng
+                th Tổng cộng
+                th Hành động
+
+        tbody
+            - var count = 1
+            if(cartInfo.products.length > 0)
+                each item in cartInfo.products
+                    tr 
+                        td #{count++}
+                        td 
+                            img(src =item.productInfo.image width="40px")
+                        td #{item.productInfo.name}
+                        td #{item.productInfo.price} VND
+                        td 
+                            input(
+                                type= "number"
+                                min = "0",
+                                max= "50"
+                                value= item.quantity
+                                data-id= item.productId
+                                input-change-quantity
+                            )
+                        td #{item.totalPrice} VND
+                        td 
+                            a(href= `/cart/delete/${item.productId}` class= "btn btn-danger") Xóa
+            else
+                tr(class="text-center")
+                    td(colspan="7") 
+                        p Không có sản phẩm trong giỏ hàng
+    if(cartInfo.products.length > 0)
+        div(class= "text-right")
+            h4() Tổng đơn hàng: 
+                span(class= "text-danger") #{cartInfo.totalPriceProduct} VND
+            a(href="/checkout" class= "btn btn-success") THANH TOÁN
+    script(src="/js/cart.js") 
