@@ -55,18 +55,24 @@ class OrderController {
             products: products,
 
         }
-        const order = new Order(objectOrder);
-        order.save();
-        await Cart.updateOne(
-            {
-                _id: cartId,
-            },
-            {
-                products: []
-            }
-        )
-        req.flash("success", "Đặt hàng thành công!")
-        res.redirect(`/checkout/success/${order.id}`)
+        try {
+            const order = new Order(objectOrder);
+            order.save();
+            await Cart.updateOne(
+                {
+                    _id: cartId,
+                },
+                {
+                    products: []
+                }
+            )
+            req.flash("successFixed", "Đặt hàng thành công!Chúng tôi sẽ xử lý đơn hàng trong thời gian sớm nhất!")
+            res.redirect(`/checkout/success/${order.id}`)
+        } catch (error) {
+            req.flash("danger", "Đặt hàng Thất bại, Vui lòng thực hiện lại!")
+            res.redirect(`/checkout/order`)
+        }
+
 
     }
     // [GET] /checkout/success/:id
@@ -74,15 +80,22 @@ class OrderController {
         const orderId = req.params.id;
 
         const orderInfo = await Order.findOne({ _id: orderId })
-
-        res.render('client/checkout/success',
-            {
-                title: "Đơn hàng",
-                titlePage: "Thông tin đơn hàng",
-                orderInfo: orderInfo,
-            }
-        )
-
+        for (const product of orderInfo.products) {
+            const productInfo = await Product.findOne({ _id: product.productId }).select("image name price ")
+            product.productInfo = productInfo
+        }
+        if (orderInfo) {
+            res.render('client/checkout/success',
+                {
+                    title: "Đơn hàng",
+                    titlePage: "Thông tin đơn hàng",
+                    orderInfo: orderInfo,
+                }
+            )
+        }
+        else {
+            res.redirect('/')
+        }
     }
 
 }

@@ -1,6 +1,44 @@
 extends ../layouts/main.pug
-
+include ../mixins/alert.pug
 block content
+    +alert-success-fixed(3000)
     h2 #{titlePage} 
-    h2 #{orderInfo}                      
+    .row
+        .col-2
+            div Họ tên 
+        .col 
+            div #{orderInfo.userInfo.name}
+    .row
+        .col-2
+            div Email
+        .col 
+            div #{orderInfo.userInfo.email}
+    .row
+        .col-2
+            div Số điện thoại
+        .col
+            div #{orderInfo.userInfo.phone}
+    .row
+        .col-2
+            div Địa chỉ
+        .col 
+            div #{orderInfo.userInfo.address}
+    table.table.mt-3
+        tr 
+            th Ảnh 
+            th Tên sản phẩm 
+            th Giá
+            th Số lượng
+        if(orderInfo.products.length > 0)
+            each item of orderInfo.products
+                tr 
+                    td 
+                        img(src= item.productInfo.image width="40px")
+                    td #{item.productInfo.name}
+                    td #{item.productInfo.price}VND
+                    td #{item.quantity}
+
+
+
+
     script(src="/js/cart.js") 

@@ -17,7 +17,7 @@ const Order = new Schema(
         ],
         status: {
             type: String,
-            default: "init"
+            default: "initial"
         },
         deleted: {
             type: Boolean,

@@ -7,20 +7,15 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css')
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css')
   link(rel='stylesheet' href='/css/login.css')
-form(action="", method= "")
+form(action="/user/login", method= "POST")
   .container
     .section.text-center
-      h4.pb-3 Đăng nhập
+      h4.pb-3 #{titlePage}
       .form-group
         input.form-control(type='email' placeholder='Email')
       .form-group.mt-2
         input.form-control(type='password' placeholder='Password')
-      a.btn.btn-primary.mt-4(href='') Đăng nhập
-      .form-group.mt-2
-        p Hoặc
-        a.btn(href='')
-          i.fa-brands.fa-facebook-f
-        a.btn(href='')
-          i.fa-brands.fa-google
+      button.btn.btn-primary.mt-4(type="submit") Đăng nhập
+
       p.mb-0.mt-4.text-center
-        a.link(href='/auth/forgotPassword') Quên mật khẩu?
+        a.link(href='/user/forgotPassword') Quên mật khẩu?
