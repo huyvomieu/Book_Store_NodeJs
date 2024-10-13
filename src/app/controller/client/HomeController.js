@@ -24,8 +24,6 @@ class HomeController {
             req.flash('error', "Lỗi!")
         }
 
-
-
     }
 }
 

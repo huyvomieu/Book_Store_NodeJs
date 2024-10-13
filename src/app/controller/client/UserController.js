@@ -1,5 +1,7 @@
 const User = require('../../models/User.model')
+const Cart = require('../../models/Cart.model')
 
+const cartMiddleware = require("../../../midlewares/cart.middleware")
 const md5 = require('md5')
 class UserController {
     // [GET] user/login
@@ -25,11 +27,23 @@ class UserController {
             res.redirect('back')
             return;
         }
-        console.log(user.tokenUser)
+        const cartUser = await Cart.findOne({ user_id: user.id })
+        // Nếu user đã có giỏ hàng thì set lại giỏ hàng và delete giỏ hàng đã có
+        if (cartUser) {
+            console.log(req.cookies.cartId)
+            await Cart.deleteOne({ _id: req.cookies.cartId })
+            res.locals.cart = cartUser;
+            res.cookie("cartId", cartUser.id);
+        }
+        // nếu user chưa có thì tìm đến cart đã có thêm id_user vào
+        else {
+            const cartId = req.cookies.cartId;
+            var cart = await Cart.findOneAndUpdate({ _id: cartId }, { user_id: user.id })
+            res.cookie("cartId", cart.id);
+        }
         req.flash('success', "Đăng nhập thành công!")
         res.cookie("tokenUser", user.tokenUser);
         res.redirect('/')
-
     }
 
     // [GET] user/register
@@ -61,13 +75,26 @@ class UserController {
         req.body.password = md5(req.body.password)
         const user = new User(req.body)
         user.save();
+        // Thêm user_id vào cart
+        const cartId = req.cookies.cartId;
+        await Cart.updateOne({ _id: cartId }, { user_id: user.id })
+
+
         req.flash("success", "Tạo tài khoản thành công");
         res.cookie("tokenUser", user.tokenUser);
         res.redirect('/')
     }
     // [GET] user/logout
-    logout(req, res, err) {
+    async logout(req, res, err) {
+        // Khi đăng xuất xóa cookie user và cartId 
         res.clearCookie('tokenUser')
+        res.clearCookie('cartId')
+
+        // 
+        const cart = new Cart();
+        await cart.save();
+        let time = 5 * 24 * 60 * 60 * 1000;
+        res.cookie('cartId', cart.id, { expires: new Date(Date.now() + time) });
         req.flash("success", "Đăng xuất thành công");
         res.redirect('/')
     }

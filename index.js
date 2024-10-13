@@ -40,7 +40,8 @@ app.use(express.json())
 // routing
 routeClient(app)
 routeAdmin(app)
-
+// page 404
+// app.get('*', (req, res, err) => res.render('client/error/404'))
 app.listen(3000, () => {
     console.log("app listening port 3000")
 })
