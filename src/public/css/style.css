@@ -23,7 +23,7 @@ body {
     position: fixed !important;
     top: 70px;
     right: 44px;
-    /* z-index: 9999px; */
+    z-index: 9999;
 }
 
 [show-alert].alert-hidden {

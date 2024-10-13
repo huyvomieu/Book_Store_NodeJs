@@ -20,6 +20,7 @@ class ProductController {
         const product = await Product.findOne(finds)
         const category = await ProductCategory.findOne({ deleted: false, _id: product.category })
         res.render('client/product/details', {
+            title: product.name,
             product: product,
             category: category
 

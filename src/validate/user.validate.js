@@ -16,3 +16,23 @@ module.exports = (req, res, next) => {
     }
     next()
 }
+
+module.exports.resetPassword = (req, res, next) => {
+    if (!req.body.password) {
+        req.flash('danger', "Vui lòng nhập mật khẩu mới!")
+        res.redirect('back')
+        return;
+    }
+    if (!req.body.confirmPassword) {
+        req.flash('danger', "Vui lòng nhập xác nhận mật khẩu mới!")
+        res.redirect('back')
+        return;
+    }
+
+    if (req.body.password != req.body.confirmPassword) {
+        req.flash('danger', "Mật khẩu không khớp!")
+        res.redirect('back')
+        return;
+    }
+    next()
+}
