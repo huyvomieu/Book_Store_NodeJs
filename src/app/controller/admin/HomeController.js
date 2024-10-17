@@ -4,6 +4,7 @@ class HomeController {
         res.render('admin/dashboard',
             {
                 title: "dashboard",
+                titlePage: "Tổng quan",
             }
         )
     }

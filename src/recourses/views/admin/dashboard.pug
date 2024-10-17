@@ -1,5 +1,60 @@
 extends layouts/main.pug
 
 block content 
-    div 
-        h2 Trang tổng quan
+    h2 #{titlePage}
+    .row 
+        .col-3 
+            h4 Sản phẩm
+        .col-3 
+            h4 Danh mục sản phẩm
+        .col-3 
+            h4 Tài khoản
+    .row 
+        .col-3
+            table(class= "table ")
+                thead(class="thead-light")
+                    tr 
+                        th Trạng thái 
+                        th Số lượng
+                tbody 
+                    tr 
+                        td Tất cả
+                        td 5
+                    tr 
+                        td Hoạt động
+                        td 5
+                    tr 
+                        td Ngừng Hoạt động
+                        td 5
+        .col-3
+            table(class= "table ")
+                thead(class="thead-light")
+                    tr 
+                        th Trạng thái 
+                        th Số lượng
+                tbody 
+                    tr 
+                        td Tất cả
+                        td 5
+                    tr 
+                        td Hoạt động
+                        td 5
+                    tr 
+                        td Ngừng Hoạt động
+                        td 5
+        .col-3
+            table(class= "table ")
+                thead(class="thead-light")
+                    tr 
+                        th Trạng thái 
+                        th Số lượng
+                tbody 
+                    tr 
+                        td Tất cả
+                        td 5
+                    tr 
+                        td Hoạt động
+                        td 5
+                    tr 
+                        td Ngừng Hoạt động
+                        td 5

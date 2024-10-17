@@ -7,6 +7,9 @@ const methodOverride = require('method-override')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const flash = require('express-flash')
+
+require("dotenv").config();
+
 const app = express()
 
 
@@ -42,6 +45,6 @@ routeClient(app)
 routeAdmin(app)
 // page 404
 // app.get('*', (req, res, err) => res.render('client/error/404'))
-app.listen(3000, () => {
-    console.log("app listening port 3000")
+app.listen(process.env.PORT, () => {
+    console.log("app listening port " + process.env.PORT)
 })
