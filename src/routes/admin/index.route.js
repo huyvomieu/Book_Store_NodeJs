@@ -4,6 +4,7 @@ const productCategory = require('./product-category.route')
 const role = require('./role.route')
 const account = require('./account.route')
 const auth = require('./auth.route')
+const setting = require('./setting.route')
 
 const requireAuthMiddleware = require('../../midlewares/auth.middleware')
 module.exports = (app) => {
@@ -12,6 +13,7 @@ module.exports = (app) => {
     app.use('/admin/role', requireAuthMiddleware.requireAuth, role)
     app.use('/admin/account', requireAuthMiddleware.requireAuth, account)
     app.use('/admin/auth', auth)
+    app.use('/admin/settings', requireAuthMiddleware.requireAuth, setting)
     app.use('/admin', requireAuthMiddleware.requireAuth, home)
 
 }

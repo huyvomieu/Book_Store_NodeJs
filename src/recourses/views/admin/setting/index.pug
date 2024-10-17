@@ -1,0 +1,24 @@
+extends ../layouts/main.pug
+include ../mixins/alert.pug
+block content
+    div()
+        h2 #{titlePage}
+    +alert-success(1500)
+    +alert-error(1500)
+    form(method="post" action="/admin/settings/update" enctype="multipart/form-data")
+        .form-group
+            label() Tên website
+            input.form-control(type="text", placeholder="", id="websitename", name="websitename")
+        .form-group
+            label() Ảnh đại diện
+            input.form-control(type= "file" name= "avatar")
+        .form-group
+            label() Email liên hệ
+            input.form-control(type="email", placeholder="Email", id="email", name="email")
+        .form-group
+            label() Địa chỉ
+            input.form-control(type="text", placeholder="Địa chỉ", id="address", name="address")
+        .form-group
+            label() Số điện thoại liên hệ
+            input.form-control(type="text", placeholder="Số điện thoại", id="phone", name="phone")  
+        button.btn.btn-primary(type="sumbit" id= "" class= "align-item-center") Cập nhật

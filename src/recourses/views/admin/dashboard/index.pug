@@ -1,4 +1,4 @@
-extends layouts/main.pug
+extends ../layouts/main.pug
 
 block content 
     h2 #{titlePage}
@@ -19,13 +19,13 @@ block content
                 tbody 
                     tr 
                         td Tất cả
-                        td 5
+                        td #{products.productsCount}
                     tr 
                         td Hoạt động
-                        td 5
+                        td #{products.productsCount_acitve}
                     tr 
                         td Ngừng Hoạt động
-                        td 5
+                        td #{products.productsCount_inacitve}
         .col-3
             table(class= "table ")
                 thead(class="thead-light")
@@ -35,13 +35,13 @@ block content
                 tbody 
                     tr 
                         td Tất cả
-                        td 5
+                        td #{ProductCategories.productCategorysCount}
                     tr 
                         td Hoạt động
-                        td 5
+                        td #{ProductCategories.productCategory_active}
                     tr 
                         td Ngừng Hoạt động
-                        td 5
+                        td #{ProductCategories.productCategory_inactive}
         .col-3
             table(class= "table ")
                 thead(class="thead-light")
@@ -51,10 +51,10 @@ block content
                 tbody 
                     tr 
                         td Tất cả
-                        td 5
+                        td #{users.userCount}
                     tr 
                         td Hoạt động
-                        td 5
+                        td #{users.user_active}
                     tr 
                         td Ngừng Hoạt động
-                        td 5
+                        td #{users.user_inactive}
